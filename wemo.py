@@ -44,7 +44,7 @@ from yombo.core.module import YomboModule
 
 from . import const as wconst
 from .wemo_devices import Wemo_Endpoint_Binary_Sensor, Wemo_Endpoint_Light, Wemo_Endpoint_Switch
-
+from .web_routes import module_wemo_routes
 
 logger = get_logger("modules.wemo")
 
@@ -92,6 +92,32 @@ class Wemo(YomboModule):
 
     def _stop_(self, **kwargs):
         self.subscription_registry.stop()
+
+    def _webinterface_add_routes_(self, **kwargs):
+        """
+        Adds a configuration block to the web interface. Currently, users can only start
+        a device discovery scan.
+
+        :param kwargs:
+        :return:
+        """
+        return {
+            'nav_side': [
+                {
+                    'label1': 'Module Settings',
+                    'label2': 'Wemo',
+                    'priority1': 820,  # Even with a value, 'Tools' is already defined and will be ignored.
+                    'priority2': 100,
+                    'icon': 'fa fa-cog fa-fw',
+                    'url': '/module_settings/wemo/index',
+                    'tooltip': '',
+                    'opmode': 'run',
+                },
+            ],
+            'routes': [
+                module_wemo_routes,
+            ],
+        }
 
     @inlineCallbacks
     def discover_devices(self):
