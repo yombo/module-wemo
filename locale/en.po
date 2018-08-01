@@ -1,0 +1,40 @@
+# Mitch Schwenk <mitch@yombo.net>, 2018
+
+msgid "module::wemo::self"
+msgstr "Zwave module"
+
+msgid "module::wemo::label"
+msgstr "Zwave"
+
+msgid "module::wemo::handled_by"
+msgstr "Handled by Wemo module"
+
+msgid "module::wemo::ui::debug_header"
+msgstr "Wemo device details"
+
+msgid "module::wemo::ui::debug_description"
+msgstr "Data as reported by the wemo device."
+
+msgid "module::wemo::ui::debug_column1"
+msgstr "Value name"
+
+msgid "module::wemo::ui::debug_column2"
+msgstr "Value data"
+
+msgid "module::wemo::ui::debug_loading_column1"
+msgstr "Wemo is still loading"
+
+msgid "module::wemo::ui::debug_loading_column2"
+msgstr "Try later."
+
+msgid "module::wemo::ui::debug::model"
+msgstr "Wemo model description"
+
+msgid "module::wemo::ui::debug::model_name"
+msgstr "Wemo device type"
+
+msgid "module::wemo::ui::debug::name"
+msgstr "User label"
+
+msgid "module::wemo::ui::debug::serialnumber"
+msgstr "Serial number"
