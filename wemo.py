@@ -23,24 +23,19 @@ more details.
 :license: Apache 2.0
 """
 # Import python libraries
-try:  # Prefer simplejson if installed, otherwise json will work swell.
-    import simplejson as json
-except ImportError:
-    import json
 import pywemo
 
 # Import twisted libraries
-from twisted.internet.defer import inlineCallbacks
 from twisted.internet import threads
+from twisted.internet.defer import inlineCallbacks
+from twisted.internet.task import LoopingCall
 
-from yombo.constants.commands import (COMMAND_ON, COMMAND_OFF, COMMAND_TOGGLE, COMMAND_COMPONENT_CALLED_BY,
-    COMMAND_COMPONENT_COMMAND, COMMAND_COMPONENT_COMMAND_ID, COMMAND_COMPONENT_DEVICE,
-    COMMAND_COMPONENT_DEVICE_COMMAND, COMMAND_COMPONENT_DEVICE_ID, COMMAND_COMPONENT_INPUTS, COMMAND_COMPONENT_PIN,
-    COMMAND_COMPONENT_REQUEST_ID, COMMAND_COMPONENT_REQUESTED_BY, COMMAND_COMPONENT_SOURCE,
-    COMMAND_COMPONENT_SOURCE_GATEWAY_ID)
+from yombo.constants.commands import (COMMAND_ON, COMMAND_OFF, COMMAND_TOGGLE,
+    COMMAND_COMPONENT_COMMAND, COMMAND_COMPONENT_DEVICE, COMMAND_COMPONENT_REQUEST_ID)
 from yombo.constants.platforms import PLATFORM_LIGHT, PLATFORM_BINARY_SENSOR, PLATFORM_SWITCH
 from yombo.core.log import get_logger
 from yombo.core.module import YomboModule
+from yombo.utils import random_int
 
 from . import const as wconst
 from .wemo_devices import Wemo_Endpoint_Binary_Sensor, Wemo_Endpoint_Light, Wemo_Endpoint_Switch
@@ -90,6 +85,9 @@ class Wemo(YomboModule):
         self._module_started()
         self.subscription_registry.start()
 
+        self.discover_devices_loop = LoopingCall(self.discover_devices)
+        self.discover_devices_loop.start(random_int(3600, .20), False)
+
     def _stop_(self, **kwargs):
         self.subscription_registry.stop()
 
@@ -106,7 +104,7 @@ class Wemo(YomboModule):
                 {
                     'label1': 'Module Settings',
                     'label2': 'Wemo',
-                    'priority1': 820,  # Even with a value, 'Tools' is already defined and will be ignored.
+                    'priority1': 2100,  # Even with a value, 'Tools' is already defined and will be ignored.
                     'priority2': 100,
                     'icon': 'fa fa-cog fa-fw',
                     'url': '/module_settings/wemo/index',

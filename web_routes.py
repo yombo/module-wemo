@@ -1,7 +1,4 @@
-try:  # Prefer simplejson if installed, otherwise json will work swell.
-    import simplejson as json
-except ImportError:
-    import json
+import json
 
 from twisted.internet.defer import inlineCallbacks
 from twisted.internet import reactor
@@ -33,8 +30,6 @@ def module_wemo_routes(webapp):
         @webapp.route("/wemo/index", methods=['GET'])
         @require_auth()
         def page_tools_module_wemo_index_get(webinterface, request, session):
-            wemo = webinterface._Modules['Wemo']
-
             page = webinterface.webapp.templates.get_template('modules/wemo/web/index.html')
             root_breadcrumb(webinterface, request)
             return page.render(alerts=webinterface.get_alerts(),

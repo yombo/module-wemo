@@ -1,0 +1,40 @@
+{% extends "lib/webinterface/fragments/layout.tpl" %}
+{% import "lib/webinterface/fragments/macros.tpl" as macros%}
+{% block head_css %}{% include 'lib/webinterface/fragments/datatables_css.tpl' %}{% endblock %}
+
+{% block content %}
+<div class="row">
+	<div class="col-lg-12">
+		<h1 class="page-header">Wemo Tools</h1>
+	</div>
+	<!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<div class="row">
+	<div class="col-lg-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4> Wemo Tools </h4>
+			</div>
+			<div class="panel-body">
+				<ul>
+					<li> <label><a href="/module_settings/wemo/discover">Discover devices</a> </label> - Scans the
+						network for new Wemo devices. This process can take up to 5 minutes to complete, most devices
+						area discovered in around 30 seconds.</li>
+					<li> <label><a href="/discovery/index">Found devices</a> </label> - Found devices will be
+						listed in the system 'Discovery' section, besure to check both tabs.</li>
+
+
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- /.col-lg-6 -->
+</div>
+<!-- /.row -->
+
+{% endblock %}
+
+{% block body_bottom_js %}{% include 'lib/webinterface/fragments/datatables_js.tpl' %}{% endblock %}
+
+

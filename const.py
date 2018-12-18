@@ -1,9 +1,8 @@
 """Z-Wave Constants."""
-DISCOVERY_SOURCE = "Wemo"
-
 PLATFORM_WEMO = "wemo"
-DEFAULT_MANUFACTURER = "wemo"
 
+DEFAULT_MANUFACTURER = "wemo"
+DISCOVERY_SOURCE = "Wemo"
 DEVICE_VARIABlE_SERIAL_NUMBER = "serialnumber"
 
 WEMO_MODEL = "model"

@@ -54,6 +54,10 @@ class Wemo_Endpoint(object):
         :param value:
         :return:
         """
+        try:
+            value = int(value)
+        except:
+            pass
         logger.debug("Wemo update_value: {value}", value=value)
 
         if self.yombo_device is None:
@@ -79,9 +83,10 @@ class Wemo_Endpoint(object):
         :return:
         """
         self.endpoint.state = value
-        status = None
-        if value == 0 or value == 1:
-            status = value
+        if value >= 1:
+            status = 1
+        else:
+            status = 0
 
         status_extra = {}
 
